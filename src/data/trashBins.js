@@ -5,4 +5,5 @@ export const trashBins = [
   { id: "BIN04", type: "normal", lat: 10.806561, lng: 106.713317 },
   { id: "BIN05", type: "recycle", lat: 10.80668, lng: 106.712797 },
   { id: "BIN06", type: "organic", lat: 10.807075, lng: 106.712845 },
+  { id: "BIN07", type: "organic", lat: 10.806727, lng: 106.712845 },
 ];

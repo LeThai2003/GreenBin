@@ -38,9 +38,10 @@ const Confirm = ({
 
     // const isCorrect = selectedType === selectedBin.type;
 
-    const isCorrect =
-      qrData?.includes(`TYPE=${selectedType}`) &&
-      qrData?.includes(`BIN_ID=${selectedBin.id}`);
+    const isCorrect = qrData?.includes(`TYPE=${selectedType}`);
+    // const isCorrect =
+    //   qrData?.includes(`TYPE=${selectedType}`) &&
+    //   qrData?.includes(`BIN_ID=${selectedBin.id}`);
 
     if (isCorrect) {
       const nextSuccess = successCount + 1;
