@@ -9,6 +9,7 @@ const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 export default function TrashMap() {
   const [selectedType, setSelectedType] = useState("organic");
   const [selectedBin, setSelectedBin] = useState(null);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   const [successCount, setSuccessCount] = useState(0);
   const [failCount, setFailCount] = useState(0);
@@ -95,6 +96,7 @@ export default function TrashMap() {
           longitude: userLocation.lng,
           zoom: 16,
         }}
+        onLoad={() => setMapLoaded(true)}
         style={{ width: "100%", height: "80%", borderRadius: "10px" }}
         mapStyle="mapbox://styles/mapbox/streets-v11"
       >
@@ -111,6 +113,15 @@ export default function TrashMap() {
             <span className="relative text-xl">📍</span>
           </div>
         </Marker>
+
+        {!mapLoaded && (
+          <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur">
+            <div className="flex flex-col items-center gap-2">
+              <div className="h-10 w-10 animate-spin rounded-full border-4 border-green-500 border-t-transparent"></div>
+              <p className="text-sm text-gray-700">Đang tải bản đồ...</p>
+            </div>
+          </div>
+        )}
 
         {/* Marker thùng rác */}
         {filteredBins.map((bin) => (
