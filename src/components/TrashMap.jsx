@@ -89,70 +89,73 @@ export default function TrashMap() {
         </div>
       </div>
 
-      <Map
-        mapboxAccessToken={MAPBOX_TOKEN}
-        initialViewState={{
-          latitude: userLocation.lat,
-          longitude: userLocation.lng,
-          zoom: 16,
-        }}
-        onLoad={() => setMapLoaded(true)}
-        style={{ width: "100%", height: "80%", borderRadius: "10px" }}
-        mapStyle="mapbox://styles/mapbox/streets-v11"
-      >
-        {/* Marker vị trí sinh viên */}
-        <Marker latitude={userLocation.lat} longitude={userLocation.lng}>
-          <div className="relative flex items-center justify-center">
-            {/* Radar */}
-            <span className="absolute inline-flex h-10 w-10 rounded-full bg-pink-400 opacity-75 animate-ping"></span>
-
-            {/* Vòng tròn cố định */}
-            {/* <span className="absolute inline-flex h-6 w-6 rounded-full bg-blue-500 opacity-80"></span> */}
-
-            {/* Icon */}
-            <span className="relative text-xl">📍</span>
-          </div>
-        </Marker>
-
-        {!mapLoaded && (
-          <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur">
-            <div className="flex flex-col items-center gap-2">
-              <div className="h-10 w-10 animate-spin rounded-full border-4 border-green-500 border-t-transparent"></div>
-              <p className="text-sm text-gray-700">Đang tải bản đồ...</p>
+      <div className="relative h-full w-full rounded-xl overflow-hidden">
+        {" "}
+        <Map
+          mapboxAccessToken={MAPBOX_TOKEN}
+          initialViewState={{
+            latitude: userLocation.lat,
+            longitude: userLocation.lng,
+            zoom: 16,
+          }}
+          onLoad={() => setMapLoaded(true)}
+          style={{ width: "100%", height: "90%", borderRadius: "10px" }}
+          mapStyle="mapbox://styles/mapbox/streets-v11"
+        >
+          {!mapLoaded && (
+            <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur">
+              <div className="flex flex-col items-center gap-2">
+                <div className="h-10 w-10 animate-spin rounded-full border-4 border-green-500 border-t-transparent"></div>
+                <p className="text-sm text-gray-700">Đang tải bản đồ...</p>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Marker thùng rác */}
-        {filteredBins.map((bin) => (
-          <Marker key={bin.id} latitude={bin.lat} longitude={bin.lng}>
-            <div
-              className="relative flex items-center justify-center cursor-pointer group"
-              onClick={() => setSelectedBin(bin)}
-            >
+          {/* Marker vị trí sinh viên */}
+          <Marker latitude={userLocation.lat} longitude={userLocation.lng}>
+            <div className="relative flex items-center justify-center">
               {/* Radar */}
-              <span
-                className={`absolute h-8 w-8 rounded-full ${bin.type == "recycle" || bin.type == "organic" ? "bg-green-400" : bin.type == "hazard" ? "bg-orange-400" : "bg-blue-400"} opacity-70 group-hover:opacity-90 animate-ping`}
-              ></span>
+              <span className="absolute inline-flex h-10 w-10 rounded-full bg-pink-400 opacity-75 animate-ping"></span>
+
+              {/* Vòng tròn cố định */}
+              {/* <span className="absolute inline-flex h-6 w-6 rounded-full bg-blue-500 opacity-80"></span> */}
 
               {/* Icon */}
-              <img
-                src={
-                  bin.type === "recycle"
-                    ? "/recycle-bin.png"
-                    : bin.type === "hazard"
-                      ? "/trash-danger.png"
-                      : bin.type === "normal"
-                        ? "/normal.png"
-                        : "/trash-bin.png"
-                }
-                alt="bin"
-                className="relative size-6"
-              />
+              <span className="relative text-xl">📍</span>
             </div>
           </Marker>
-        ))}
-      </Map>
+
+          {/* Marker thùng rác */}
+          {filteredBins.map((bin) => (
+            <Marker key={bin.id} latitude={bin.lat} longitude={bin.lng}>
+              <div
+                className="relative flex items-center justify-center cursor-pointer group"
+                onClick={() => setSelectedBin(bin)}
+              >
+                {/* Radar */}
+                <span
+                  className={`absolute h-8 w-8 rounded-full ${bin.type == "recycle" || bin.type == "organic" ? "bg-green-400" : bin.type == "hazard" ? "bg-orange-400" : "bg-blue-400"} opacity-70 group-hover:opacity-90 animate-ping`}
+                ></span>
+
+                {/* Icon */}
+                <img
+                  src={
+                    bin.type === "recycle"
+                      ? "/recycle-bin.png"
+                      : bin.type === "hazard"
+                        ? "/trash-danger.png"
+                        : bin.type === "normal"
+                          ? "/normal.png"
+                          : "/trash-bin.png"
+                  }
+                  alt="bin"
+                  className="relative size-6"
+                />
+              </div>
+            </Marker>
+          ))}
+        </Map>
+      </div>
 
       {/* ===== Info thùng rác ===== */}
       {/* {selectedBin && (

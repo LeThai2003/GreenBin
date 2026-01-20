@@ -83,7 +83,7 @@ const Confirm = ({
   return (
     <div className="w-full ">
       <div className="flex gap-3 mt-1 mb-3">
-        <div className="flex-1">
+        <div className="flex-1 flex-col items-end">
           {/* <input
             type="file"
             accept="image/*"
@@ -125,7 +125,7 @@ const Confirm = ({
           </button>
         </div>
 
-        <div className="flex-1 ">
+        <div className="flex-1 flex items-end">
           {/* <button
             onClick={() => {
               if (selectedBin) {
