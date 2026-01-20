@@ -1,10 +1,10 @@
 export const fakeUser = {
   id: "u01",
   name: "Nguyễn Thị Bảo Ngọc",
-  studentId: "N21DCCN076",
+  studentId: "2412155200",
   avatar: null, //
   greenPoints: 120,
   trainingPoints: 85,
-  faculty: "Công nghệ thông tin",
+  faculty: "Kinh tế đối ngoại",
   campaignsJoined: 3,
 };
