@@ -110,7 +110,7 @@ const Confirm = ({
           {photo && (
             <img
               src={URL.createObjectURL(photo)}
-              className="mt-3 rounded-lg w-full max-w-xs"
+              className="my-2 rounded-lg w-full max-w-xs"
               alt="Ảnh rác"
             />
           )}
